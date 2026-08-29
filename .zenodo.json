@@ -1,0 +1,29 @@
+{
+  "title": "Cores of Binary 3-Qualitative Independence Hypergraphs",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "description": "We prove that the binary 3-qualitative independence hypergraph 3-QI(n,2) is a core for every n >= 8. The proof establishes every even uniform middle layer, combines this with the previous odd almost-uniform result, and proves a middle-layer rigidity lift to the full hypergraph. The package includes a human-readable manuscript, finite certificate verifiers, source files, and AI-audit records. No qualified human specialist has peer reviewed the complete argument.",
+  "creators": [
+    {
+      "name": "Kim, Jihun"
+    }
+  ],
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "keywords": [
+    "qualitative independence hypergraph",
+    "hypergraph core",
+    "covering array",
+    "graph homomorphism",
+    "folded Johnson graph",
+    "Steiner system",
+    "AI-assisted mathematics"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.22096460",
+      "relation": "isSupplementTo",
+      "scheme": "doi"
+    }
+  ]
+}
