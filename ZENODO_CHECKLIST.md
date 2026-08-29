@@ -7,8 +7,8 @@
 - [x] Review AI_DISCLOSURE.md.
 - [x] Confirm author name and email.
 - [x] Confirm title, abstract, keywords, and license in .zenodo.json.
-- [ ] Reserve a new Zenodo DOI.
-- [ ] Insert the reserved DOI into CITATION.cff, README, and PDF metadata.
+- [x] Reserve a new Zenodo DOI.
+- [x] Insert the reserved DOI into CITATION.cff, README, and PDF metadata.
 - [ ] Tag the matching Git commit.
 - [ ] Build a source archive from the tag.
 - [ ] Generate SHA-256 and MD5 manifests.

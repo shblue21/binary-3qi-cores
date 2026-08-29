@@ -1,6 +1,7 @@
 # Cores of Binary 3-Qualitative Independence Hypergraphs
 
 [![Verification](https://github.com/shblue21/binary-3qi-cores/actions/workflows/verify.yml/badge.svg)](https://github.com/shblue21/binary-3qi-cores/actions/workflows/verify.yml)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22164331.svg)](https://doi.org/10.5281/zenodo.22164331)
 
 This repository contains the source, PDF, and verification programs for the
 preprint *Cores of Binary 3-Qualitative Independence Hypergraphs*.  Its main
@@ -49,6 +50,9 @@ The verification programs use only the Python standard library.
 The canonical source repository is:
 
     https://github.com/shblue21/binary-3qi-cores
+
+The archived release is available at
+[doi:10.5281/zenodo.22164331](https://doi.org/10.5281/zenodo.22164331).
 
 ## Mathematical status
 

@@ -12,7 +12,7 @@
 - GitHub Actions verification: configured.
 - Qualified human specialist review: not yet obtained.
 - Formal proof assistant verification: not performed.
-- Zenodo DOI: not reserved.
+- Zenodo DOI: 10.5281/zenodo.22164331 reserved.
 - Public release: not performed.
 
 The package is suitable for final mathematical review and DOI reservation,

@@ -2,6 +2,8 @@
 
 Version: v0.1.0 DOI-preparation candidate
 
+Reserved DOI: 10.5281/zenodo.22164331
+
 ## Zenodo payloads
 
 - binary-3qi-cores-preprint-v0.1.0.pdf
@@ -22,4 +24,4 @@ the payloads in release/SHA256SUMS and release/MD5SUMS.
 - PDF pages: 10.
 - PDF visual inspection: pass.
 - Qualified human specialist review: not yet performed.
-- Zenodo DOI: pending.
+- Zenodo DOI: 10.5281/zenodo.22164331 reserved.

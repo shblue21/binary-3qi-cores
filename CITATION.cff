@@ -9,6 +9,8 @@ authors:
     given-names: Jihun
     email: jihunkimkw@gmail.com
 license: CC-BY-4.0
+doi: 10.5281/zenodo.22164331
+url: "https://doi.org/10.5281/zenodo.22164331"
 repository-code: "https://github.com/shblue21/binary-3qi-cores"
 keywords:
   - qualitative independence

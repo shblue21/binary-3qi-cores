@@ -2,6 +2,8 @@
 
 ## v0.1.0 - DOI preparation candidate - 30 August 2026
 
+Reserved DOI: `10.5281/zenodo.22164331`.
+
 - Proves the balanced-layer lift
   \(B_n\) core \(\Rightarrow 3\text{-}\mathrm{QI}(n,2)\) core.
 - Proves \(3\text{-}\mathrm{UQI}(n,2)\) is a core for every even
