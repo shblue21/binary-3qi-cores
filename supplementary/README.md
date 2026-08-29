@@ -7,6 +7,10 @@ Run:
     python3 verify_certificates.py
     python3 verify_lift_small.py
 
+From the repository root, `python3 supplementary/build_release.py` packages
+the already-built deterministic PDF and source tree.  The `make package`
+target runs every release check before invoking it.
+
 `verify_certificates.py` checks the 55 anchors in the \(n=12\) obstruction
 and the 630 anchors in the \(n=16\) boundary construction.
 
@@ -16,3 +20,6 @@ witness for every ordered pair of distinct vertices at \(n=8,9,10\).
 
 These finite checks are falsification and transcription checks. The
 general theorems are proved symbolically in the manuscript.
+
+The programs use explicit verification exceptions rather than Python
+`assert`, so the same checks remain active under `python3 -O`.

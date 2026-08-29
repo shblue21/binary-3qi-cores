@@ -1,8 +1,17 @@
 #!/usr/bin/env python3
-"""Verify the n=12 and n=16 critical-fold certificates."""
+"""Verify the n=12 and n=16 collision certificates."""
 
 from itertools import combinations, product
 from math import comb
+
+
+class VerificationError(RuntimeError):
+    """Raised when a claimed certificate condition fails."""
+
+
+def require(condition, message):
+    if not condition:
+        raise VerificationError(message)
 
 
 def finite_atoms(ground, triple):
@@ -53,9 +62,13 @@ def verify_n12():
         for offset, symbol in enumerate(entries, start=1):
             j = i + offset
             anchor = p if symbol == "P" else q
-            assert seven_cell_edge(ground, anchor, aux[i], aux[j])
+            require(
+                seven_cell_edge(ground, anchor, aux[i], aux[j]),
+                "n=12 anchor failure for auxiliary pair ({}, {}) with {}"
+                .format(i + 1, j + 1, symbol),
+            )
             checks += 1
-    assert checks == 55
+    require(checks == 55, "n=12 check count is {}, expected 55".format(checks))
     return checks
 
 
@@ -107,7 +120,7 @@ def verify_m4():
             elif u not in p_free and v not in p_free:
                 kind = 11
             else:
-                raise AssertionError("unclassified complement pair")
+                raise VerificationError("unclassified complement pair")
             representatives = (p_free,)
         pair_classes[kind].append((key, representatives))
 
@@ -116,8 +129,12 @@ def verify_m4():
         10: comb(2 * m - 3, m - 2),
         11: comb(2 * m - 3, m - 3),
     }
-    assert {kind: len(items) for kind, items in d_classes.items()} == expected
-    assert {kind: len(items) for kind, items in pair_classes.items()} == expected
+    actual_d = {kind: len(items) for kind, items in d_classes.items()}
+    actual_pairs = {kind: len(items) for kind, items in pair_classes.items()}
+    require(actual_d == expected,
+            "domain type counts {} do not match {}".format(actual_d, expected))
+    require(actual_pairs == expected,
+            "pair type counts {} do not match {}".format(actual_pairs, expected))
 
     central = []
     central_kind = []
@@ -129,27 +146,43 @@ def verify_m4():
             central.append(frozenset(set(a) | set(b)))
             central_kind.append(kind)
 
-    assert len(central) == comb(2 * m - 1, m - 1) == 35
-    assert len(set(central)) == len(central)
-    assert all(len(block) == 2 * m - 1 for block in central)
+    expected_central = comb(2 * m - 1, m - 1)
+    require(len(central) == expected_central == 35,
+            "central family has size {}, expected {}"
+            .format(len(central), expected_central))
+    require(len(set(central)) == len(central),
+            "central family contains duplicate blocks")
+    require(all(len(block) == 2 * m - 1 for block in central),
+            "central family contains a block of the wrong size")
 
     exceptional = frozenset({x, p} | (wset - {u, v}))
-    assert len(exceptional) == 2 * m - 1
-    assert exceptional not in central
+    require(len(exceptional) == 2 * m - 1,
+            "exceptional block has the wrong size")
+    require(exceptional not in central,
+            "exceptional block duplicates a central block")
 
     central_checks = 0
     for i, j in combinations(range(len(central)), 2):
-        assert seven_cell_edge(ground, q_block, central[i], central[j])
+        require(
+            seven_cell_edge(ground, q_block, central[i], central[j]),
+            "central edge failure for indices ({}, {})".format(i, j),
+        )
         central_checks += 1
 
     exceptional_checks = 0
     for block, kind in zip(central, central_kind):
         anchor = q_block if kind == 0 else p_block
-        assert seven_cell_edge(ground, anchor, exceptional, block)
+        require(
+            seven_cell_edge(ground, anchor, exceptional, block),
+            "exceptional edge failure for kind {}".format(kind),
+        )
         exceptional_checks += 1
 
-    assert central_checks == 595
-    assert exceptional_checks == 35
+    require(central_checks == 595,
+            "central check count is {}, expected 595".format(central_checks))
+    require(exceptional_checks == 35,
+            "exceptional check count is {}, expected 35"
+            .format(exceptional_checks))
     return central_checks, exceptional_checks
 
 

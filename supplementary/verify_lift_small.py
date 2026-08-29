@@ -4,6 +4,15 @@
 from itertools import combinations
 
 
+class VerificationError(RuntimeError):
+    """Raised when a finite lift check fails."""
+
+
+def require(condition, message):
+    if not condition:
+        raise VerificationError(message)
+
+
 def popcount(value):
     return bin(value).count("1")
 
@@ -49,17 +58,19 @@ def separation_witness(x, y, n):
         if all(candidate & x_block for x_block in x_blocks):
             chosen_e = candidate
             break
-    assert chosen_e is not None
+    require(chosen_e is not None,
+            "no separating Y-block meets both blocks of X")
 
     colours = [-1] * n
     for x_block in x_blocks:
         inside_e = [p for p in range(n) if (x_block >> p) & 1 and
                     (chosen_e >> p) & 1]
-        assert inside_e
+        require(inside_e, "chosen Y-block misses a block of X")
         colours[inside_e[0]] = 3
         remaining = [p for p in range(n) if (x_block >> p) & 1 and
                      colours[p] < 0]
-        assert len(remaining) >= 3
+        require(len(remaining) >= 3,
+                "an X-block has fewer than three uncoloured points")
         colours[remaining[0]] = 0
         colours[remaining[1]] = 1
         colours[remaining[2]] = 2
@@ -68,9 +79,11 @@ def separation_witness(x, y, n):
     target = [2, k - 2, k - 2, 2] if n % 2 == 0 else [3, k - 2, k - 2, 2]
     current = [colours.count(colour) for colour in range(4)]
     deficit = [target[i] - current[i] for i in range(4)]
-    assert all(value >= 0 for value in deficit)
+    require(all(value >= 0 for value in deficit),
+            "target colour multiplicities do not dominate the seed")
     uncoloured = [p for p in range(n) if colours[p] < 0]
-    assert sum(deficit) == len(uncoloured)
+    require(sum(deficit) == len(uncoloured),
+            "colour deficit does not match the uncoloured points")
     cursor = 0
     for colour, count in enumerate(deficit):
         for _ in range(count):
@@ -84,10 +97,14 @@ def separation_witness(x, y, n):
             r |= 1 << point
         if colour in (1, 3):
             s |= 1 << point
-    assert middle(r, n) and middle(s, n)
-    assert r != s and r != (full ^ s)
-    assert edge3(x, r, s, n)
-    assert not edge3(y, r, s, n)
+    require(middle(r, n) and middle(s, n),
+            "constructed anchors are not in the middle layer")
+    require(r != s and r != (full ^ s),
+            "constructed anchors represent the same bipartition")
+    require(edge3(x, r, s, n),
+            "constructed anchors do not form an edge with X")
+    require(not edge3(y, r, s, n),
+            "constructed anchors also form an edge with Y")
     return r, s
 
 
@@ -136,7 +153,8 @@ def main():
     expected_q = {4: 3, 5: 4, 6: 10}
     for t, expected in expected_q.items():
         actual = maximum_clique(cross_graph(t))
-        assert actual == expected, (t, actual, expected)
+        require(actual == expected,
+                "q({}) is {}, expected {}".format(t, actual, expected))
         print("Q({})={}".format(t, actual))
 
     for n in (8, 9, 10):

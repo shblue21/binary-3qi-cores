@@ -3,16 +3,17 @@ message: "If you use this work, please cite the preprint."
 title: "Cores of Binary 3-Qualitative Independence Hypergraphs"
 type: article
 version: 0.1.0
-date-released: 2026-08-29
+date-released: 2026-08-30
 authors:
   - family-names: Kim
     given-names: Jihun
     email: jihunkimkw@gmail.com
 license: CC-BY-4.0
+repository-code: "https://github.com/shblue21/binary-3qi-cores"
 keywords:
   - qualitative independence
   - hypergraph core
   - covering arrays
-  - graph homomorphism
-  - folded Johnson graph
+  - hypergraph homomorphism
+  - merged Johnson graph
   - Steiner system

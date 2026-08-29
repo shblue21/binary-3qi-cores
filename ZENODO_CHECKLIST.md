@@ -1,12 +1,12 @@
 # Zenodo release checklist
 
-- [ ] Run make clean and make release-check.
-- [ ] Visually inspect every rendered PDF page.
-- [ ] Confirm all references and cross-references resolve.
-- [ ] Confirm the finite verification programs pass twice.
-- [ ] Review AI_DISCLOSURE.md.
-- [ ] Confirm author name and email.
-- [ ] Confirm title, abstract, keywords, and license in .zenodo.json.
+- [x] Run make clean and make release-check.
+- [x] Visually inspect every rendered PDF page.
+- [x] Confirm all references and cross-references resolve.
+- [x] Confirm the finite verification programs pass twice.
+- [x] Review AI_DISCLOSURE.md.
+- [x] Confirm author name and email.
+- [x] Confirm title, abstract, keywords, and license in .zenodo.json.
 - [ ] Reserve a new Zenodo DOI.
 - [ ] Insert the reserved DOI into CITATION.cff, README, and PDF metadata.
 - [ ] Tag the matching Git commit.

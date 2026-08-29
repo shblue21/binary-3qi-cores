@@ -14,44 +14,47 @@
 
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Aut}{Aut}
-\DeclareMathOperator{\core}{core}
 
 \hypersetup{
   pdftitle={Cores of Binary 3-Qualitative Independence Hypergraphs},
   pdfauthor={Jihun Kim},
   pdfsubject={Hypergraph cores and qualitative independence},
   pdfkeywords={qualitative independence, hypergraph core, covering array,
-    graph homomorphism, folded Johnson graph, Steiner system}
+    hypergraph homomorphism, merged Johnson graph, Steiner system}
 }
 
 \title{Cores of Binary \(3\)-Qualitative Independence Hypergraphs}
 \author{Jihun Kim\\
 \small \texttt{jihunkimkw@gmail.com}}
-\date{29 August 2026}
+\date{30 August 2026}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
 Let \(3\text{-}\mathrm{QI}(n,2)\) be the \(3\)-uniform hypergraph whose
-vertices are binary bipartitions of an \(n\)-set with both classes of size at
-least \(4\), and whose edges are triples realizing all eight binary patterns.
-We prove that \(3\text{-}\mathrm{QI}(n,2)\) is a core for every \(n\ge8\).
-The proof has two parts.  First, we prove that every uniform middle layer
-\(3\text{-}\mathrm{UQI}(n,2)\) is a core for even \(n\ge8\).  The cases
-\(n\equiv2\pmod4\) are reduced to the nonexistence of a Steiner system,
-while the cases \(n\equiv0\pmod4\) are handled by a two-anchor
-critical-fold obstruction and a Sperner bound on link cliques.  Second, we
-prove a middle-layer rigidity theorem: if the most balanced layer is a core,
-then the full qualitative-independence hypergraph is a core.  This uses an
-exact crossing-family bound, endomorphism invariance of the middle layer, a
-finite-order power argument, and a balanced-anchor separation construction.
+vertices are unordered bipartitions of an \(n\)-element set into two blocks
+of size at least \(4\).  Three such bipartitions form an edge if their common
+refinement has all eight cells nonempty.  We prove that this hypergraph is a
+core for every \(n\ge8\), resolving an open problem of Thomas and Akhtar.
+Our main structural result is a lift theorem: if the most balanced
+layer is a core, then so is the full hypergraph.  Its proof shows that
+endomorphisms preserve the balanced layer and uses a separation argument to
+extend rigidity from that layer to every vertex.  We then prove that the
+balanced layer is a core for every even \(n\).  For
+\(n\equiv2\pmod4\), a symmetry reduction and a divisibility
+obstruction to a Steiner system exclude the only possible proper core.  For
+\(n\equiv0\pmod4\) and \(n\ge16\), link-clique bounds together with explicit
+combinatorial constructions rule out noninjective endomorphisms; \(n=12\) is
+handled by a separate certificate, while \(n=8\) is the known base case.
+Combining the even result with the odd balanced-layer
+theorem proved in a companion manuscript gives the result for all \(n\ge8\).
 \end{abstract}
 
 \medskip
 \noindent\textbf{Keywords.}
-Qualitative independence; hypergraph core; graph homomorphism; covering
-array; folded Johnson graph; Steiner system; Sperner theorem.
+Qualitative independence; hypergraph core; hypergraph homomorphism; covering
+array; merged Johnson graph; Steiner system.
 
 \medskip
 \noindent\textbf{MSC 2020.}
@@ -60,55 +63,67 @@ array; folded Johnson graph; Steiner system; Sperner theorem.
 \section{Introduction}
 
 A finite hypergraph is a \emph{core} if every endomorphism is an
-automorphism.  Cores are the minimal representatives of homomorphic
-equivalence classes and retain homomorphism-monotone invariants.  Qualitative
-independence hypergraphs encode covering arrays: a triple of binary columns
-is adjacent precisely when all eight binary row patterns occur.
+automorphism; see \cite{HellNesetril2004} for the graph setting.  In a binary
+qualitative-independence hypergraph, a vertex is an unordered bipartition of
+an \(n\)-element ground set, and three vertices form an edge when their common
+refinement has all eight cells nonempty.  These hypergraphs encode triples of
+columns in binary covering arrays
+\cite{MeagherStevens2005,AkhtarMaity2017}.
 
-Thomas and Akhtar initiated the systematic study of cores of binary
-\(3\)-qualitative independence hypergraphs, proved the case \(n=8\), and
-left the determination of the core of \(3\text{-}\mathrm{QI}(n,2)\) for
-\(n>8\) as an open problem \cite{ThomasAkhtar2026}.  They also related the
-uniform and almost-uniform middle layers to merged Johnson graphs.
+Write \(H_n=3\text{-}\mathrm{QI}(n,2)\), and let \(B_n\) be the subhypergraph
+induced by the most balanced bipartitions.  Thus \(B_n\) is
+\(3\text{-}\mathrm{UQI}(n,2)\) when \(n\) is even and
+\(3\text{-}\mathrm{AUQI}(n,2)\) when \(n\) is odd.  Thomas and Akhtar proved
+that \(H_8=B_8\) is a core and asked for the core of \(H_n\) for \(n>8\)
+\cite{ThomasAkhtar2026}.  They also identified the \(2\)-sections of the
+balanced layers with merged Johnson graphs.
 
-For odd \(n\ge9\), the core property of the almost-uniform middle layer was
-proved in \cite{KimMergedJohnson2026} by determining the endomorphism monoid
-of the relevant merged Johnson graph.  The present paper supplies the even
-middle layers and then lifts the middle-layer result to the full hypergraph.
+For odd \(n\ge9\), the companion work \cite{KimMergedJohnson2026} determines
+the endomorphism monoid of the corresponding merged Johnson graph and thereby
+shows that the balanced layer \(B_n\) is a core.  The present paper treats the
+even balanced layers and establishes the passage from \(B_n\) to \(H_n\).
+
+Our lift theorem shows that endomorphisms preserve the balanced layer and that
+rigidity on this layer extends to the full hypergraph.  Maximum link cliques
+identify the balanced layer intrinsically, while a separation lemma forces an
+endomorphism that fixes the layer pointwise to fix every vertex.  For the even
+balanced layers, we analyse their \(2\)-sections, using a Steiner-system
+obstruction in one congruence class and a direct collision argument in the
+other.  Together
+with the odd balanced-layer theorem, this resolves the problem of Thomas and
+Akhtar for every \(n>8\).
 
 \begin{theorem}\label{thm:main}
-For every integer \(n\ge8\), the hypergraph
-\[
-3\text{-}\mathrm{QI}(n,2)
-\]
-is a core.
+For every integer \(n\ge8\), the hypergraph \(H_n\) is a core.
 \end{theorem}
 
-Two intermediate results may be useful beyond the present application.
-
-\begin{theorem}[Even middle layers]\label{thm:even-middle}
-For every even integer \(n\ge8\),
-\[
-3\text{-}\mathrm{UQI}(n,2)
-\]
-is a core.
+\begin{theorem}[Even balanced layers]\label{thm:even-middle}
+For every even integer \(n\ge8\), the balanced layer
+\(B_n=3\text{-}\mathrm{UQI}(n,2)\) is a core.
 \end{theorem}
 
-\begin{theorem}[Middle-layer lift]\label{thm:lift}
-Let \(B_n\) be the most balanced layer of
-\(H_n=3\text{-}\mathrm{QI}(n,2)\).  If \(B_n\) is a core, then \(H_n\) is a
-core.
+\begin{theorem}[Balanced-layer lift]\label{thm:lift}
+Let \(n\ge8\).  If the balanced layer \(B_n\) of \(H_n\) is a core, then
+\(H_n\) is a core.
 \end{theorem}
 
 \section{Qualitative independence and cores}
 
-Let \(\Omega\) be an \(n\)-element set.  A binary string is identified,
-up to interchanging its two symbols, with an unordered bipartition
+Let \(\Omega\) be an \(n\)-element set.  A binary string is identified, up to
+interchanging its two symbols, with an unordered bipartition
 \[
 [A]=\{A,\Omega\setminus A\}.
 \]
-The vertices of \(H_n=3\text{-}\mathrm{QI}(n,2)\) are those bipartitions
-whose two blocks have size at least \(4\).  Three vertices
+For a subset \(A\) of the current ground set, write \(A^c\) for its
+complement.  Thus, for the present set \(\Omega\),
+\(A^c=\Omega\setminus A\).  Write \(A^1=A\) and \(A^0=A^c\).  When an
+orientation has been fixed, we occasionally denote the vertex \([A]\) by its
+chosen representative \(A\).  Throughout, a homomorphism
+of simple \(3\)-uniform hypergraphs is a vertex map taking every \(3\)-edge
+to a \(3\)-edge; an endomorphism has the same source and target.
+In the standard definition of \(3\text{-}\mathrm{QI}(n,2)\), each binary
+symbol occurs at least \(4=2^{3-1}\) times; equivalently, both blocks have
+size at least \(4\) \cite{ThomasAkhtar2026}.  Three vertices
 \([A],[B],[C]\) form an edge when all eight cells
 \[
 A^{\epsilon_1}\cap B^{\epsilon_2}\cap C^{\epsilon_3},
@@ -117,7 +132,9 @@ A^{\epsilon_1}\cap B^{\epsilon_2}\cap C^{\epsilon_3},
 \]
 are nonempty.  This condition is independent of the chosen orientations.
 
-The \emph{middle layer} \(B_n\) consists of the bipartitions with block
+For \(n\ge8\), the \emph{balanced layer} (also called the \emph{middle
+layer}) \(B_n\) is the subhypergraph induced
+by the bipartitions with block
 sizes
 \[
 \left\lfloor\frac n2\right\rfloor,
@@ -132,21 +149,24 @@ graph on \(V(H)\) in which two vertices are adjacent when they lie together
 in a hyperedge.
 
 \begin{lemma}[Graph-to-hypergraph transfer]\label{lem:transfer}
-If \([H]_2\) is a core, then \(H\) is a core.
+Let \(H\) be a finite simple \(3\)-uniform hypergraph.  If \([H]_2\) is a
+core, then \(H\) is a core.
 \end{lemma}
 
 \begin{proof}
 Every endomorphism of \(H\) is an endomorphism of \([H]_2\).  If
-\([H]_2\) is a core, that map is injective.  On a finite vertex set it is
+\([H]_2\) is a core, that map is injective.  On a finite vertex set, it is
 bijective.  The induced map on \(3\)-subsets is then a permutation, and it
 maps the finite edge set injectively into itself, hence onto itself.
 \end{proof}
 
-\section{Crossing cuts and the middle-layer lift}
+\section{Crossing cuts and the balanced-layer lift}
 
-For a \(t\)-set \(T\), let \(\mathrm{Cross}(t)\) be the graph whose vertices
-are nontrivial unordered bipartitions of \(T\), two of which are adjacent
-when all four cells of their common refinement are nonempty.
+Throughout this section, \(n\ge8\).
+
+For a set \(T\) of size \(t\), let \(\mathrm{Cross}(t)\) be the graph whose
+vertices are nontrivial unordered bipartitions of \(T\), two of which are
+adjacent when all four cells of their common refinement are nonempty.
 
 \begin{proposition}\label{prop:cross}
 For \(t\ge4\),
@@ -158,15 +178,19 @@ Moreover, \(q(t+1)>q(t)\) for every \(t\ge4\).
 \end{proposition}
 
 \begin{proof}
-If \(t=2r\), orient each cut toward a fixed point \(p\).  Removing \(p\)
-from the chosen sides gives an antichain on \(2r-1\) points, so Sperner's
-theorem gives the upper bound \(\binom{2r-1}{r-1}\).  Equality is attained
-by all \(r\)-subsets containing \(p\).
+For each cut, choose the side containing a fixed point \(p\), and then delete
+\(p\) from that side.  The resulting traces form an antichain in
+\(T\setminus\{p\}\), because the chosen sides of two crossing cuts are
+incomparable.  If \(t=2r\), Sperner's theorem therefore gives the upper bound
+\(\binom{2r-1}{r-1}\), attained by the cuts whose chosen sides are the
+\(r\)-subsets containing \(p\) \cite{Sperner1928}.
 
-If \(t=2r+1\), the complements of the oriented traces form an intersecting
-antichain on \(2r\) points.  Milner's intersecting-antichain theorem gives
-\(\binom{2r}{r-1}\), attained by all \(r\)-subsets containing \(p\)
-\cite{Milner1968}.  The ratios
+Now let \(t=2r+1\), and write \(U=T\setminus\{p\}\).  Crossing also implies
+that \(F\cup F'\ne U\) for any two distinct traces \(F\) and \(F'\).  Hence their
+complements in \(U\) form an intersecting antichain.  Milner's theorem gives
+the upper bound \(\binom{2r}{r-1}\), again attained by the cuts whose chosen
+sides are the \(r\)-subsets containing \(p\) \cite{Milner1968}.  Finally, the
+ratios
 \[
 \frac{q(2r+1)}{q(2r)}=\frac{2r}{r+1}>1,
 \qquad
@@ -175,40 +199,58 @@ antichain on \(2r\) points.  Milner's intersecting-antichain theorem gives
 give strict monotonicity.
 \end{proof}
 
-For \(T\in V(H_n)\), let \(L_T\) denote the link graph:
+For a finite simple \(3\)-uniform hypergraph \(H\) and \(T\in V(H)\), let
+\(L_H(T)\) denote the link graph:
 \[
-R\sim_{L_T}S
+R\sim_{L_H(T)}S
 \quad\Longleftrightarrow\quad
-\{T,R,S\}\in E(H_n).
+\{T,R,S\}\in E(H).
+\]
+For a bipartition \(T\), put
+\[
+\tau(T):=\min\{|C|:C\in T\}.
 \]
 
-\begin{lemma}[Intrinsic middle layer]\label{lem:middle-invariant}
+\begin{lemma}[Middle-layer invariance]\label{lem:middle-invariant}
 Every endomorphism of \(H_n\) maps \(B_n\) into \(B_n\).
 \end{lemma}
 
 \begin{proof}
-Let the smaller block of \(T\) have size \(t\).  Restriction to that block
-maps every link clique injectively into \(\mathrm{Cross}(t)\), hence
+We first prove that \(\omega(L_{H_n}(T))\le q(\tau(T))\).  The assertion is
+immediate for a clique of order at most one.  For a larger clique
+\(\mathcal C\), associate to each \(R\in\mathcal C\) the unordered cut
+induced by \(R\) on a block of \(T\) of size \(\tau(T)\).  For
+\(R,S\in\mathcal C\), the four
+cells of these local cuts are precisely the four cells of the triple
+\((T,R,S)\) inside that block.  Thus the local cuts cross.  The restriction
+is injective, since equal unordered cuts would leave two of those cells
+empty.  Therefore
 \[
-\omega(L_T)\le q(t).
+\omega(L_{H_n}(T))\le q(\tau(T)).
 \]
-If \(T\in B_n\), let \(b=\lfloor n/2\rfloor\).  Take a maximum
-\(q(b)\)-crossing family on the \(b\)-block.  On the other block take a
-\(q(b)\)-element crossing family: when \(n\) is odd, this is a subfamily of
-a maximum \(q(b+1)\)-family.  Pair the local cuts and join corresponding
-sides.  The resulting global bipartitions form a \(q(b)\)-clique in
-\(L_T\).  Their two blocks have size at least \(4\), including the boundary
-cases \(n=8,9\).
+If \(T\in B_n\), let \(b=\lfloor n/2\rfloor\).  On each block, choose the
+extremal family from Proposition~\ref{prop:cross}, orienting every chosen
+side towards its fixed point.  Retain all \(q(b)\) cuts on the
+\(b\)-block and \(q(b)\) cuts on the other block; when \(n\) is odd, discard
+the surplus cuts from the \(q(b+1)\)-family.  Pair the two local families
+arbitrarily and take the unions of corresponding oriented sides.  Every pair
+of resulting global cuts realises all four joint colours inside each block of
+\(T\), and hence forms an edge with \(T\).  Each local side has size at least
+\(2\), so both blocks of every global cut have size at least \(4\); the fixed
+orientations also make the global cuts distinct.  We have constructed a
+\(q(b)\)-clique in \(L_{H_n}(T)\), including the boundary cases \(n=8,9\).
 
-An endomorphism maps a link clique of size at least two injectively into a
-link clique.  Thus, for \(T\in B_n\),
+An endomorphism maps every link clique of size at least two injectively into
+the link at the image vertex.  Thus, for \(T\in B_n\),
 \[
-q(b)=\omega(L_T)\le\omega(L_{f(T)})\le q(t(f(T))).
+q(b)=\omega(L_{H_n}(T))
+\le\omega(L_{H_n}(f(T)))
+\le q(\tau(f(T))).
 \]
-Strict monotonicity and \(t(f(T))\le b\) imply \(t(f(T))=b\).
+Strict monotonicity and \(\tau(f(T))\le b\) imply \(\tau(f(T))=b\).
 \end{proof}
 
-\begin{lemma}[Balanced-anchor separation]\label{lem:separation}
+\begin{lemma}[Separation by the balanced layer]\label{lem:separation}
 For distinct \(X,Y\in V(H_n)\), there exist \(R,S\in B_n\) such that
 \[
 \{X,R,S\}\in E(H_n),
@@ -218,12 +260,12 @@ For distinct \(X,Y\in V(H_n)\), there exist \(R,S\in B_n\) such that
 \end{lemma}
 
 \begin{proof}
-Write \(X=\{X_0,X_1\}\) and \(Y=\{Y_0,Y_1\}\).  Since \(X\ne Y\), some
-block \(E\) of \(Y\) meets both blocks of \(X\); otherwise the two
-partitions coincide.  Put \(D=E^c\).
+Write the two blocks of \(X\) as \(X_0\) and \(X_1\).  Since \(X\ne Y\), some block
+\(Y_*\) of \(Y\) meets both blocks of \(X\); otherwise the two partitions
+coincide.  Put \(D=Y_*^c\).
 
 Colour \(\Omega\) with the four colours \(00,01,10,11\).  Choose one point
-in each \(X_i\cap E\) and colour those two points \(11\).  In each \(X_i\),
+in each \(X_i\cap Y_*\) and colour those two points \(11\).  In each \(X_i\),
 colour three additional points \(00,01,10\).  Every \(X_i\) now contains
 all four colours, while \(D\) contains no point of colour \(11\).
 
@@ -235,15 +277,19 @@ for \(n=2k+1\), complete them to
 \[
 (3,k-2,k-2,2).
 \]
-The remaining required multiplicities are nonnegative because \(k\ge4\).
-Define
+The eight points already chosen contribute two occurrences of each colour.
+Since \(k\ge4\), the displayed targets dominate these initial counts and sum
+to \(n\), so the remaining points can be coloured to achieve them.  Define
 \[
-R=\{x:c(x)\in\{10,11\}\},
+R^*=\{x:c(x)\in\{10,11\}\},
 \qquad
-S=\{x:c(x)\in\{01,11\}\}.
+S^*=\{x:c(x)\in\{01,11\}\},
+\qquad R=[R^*],\quad S=[S^*].
 \]
-Then \(R,S\in B_n\), every \(X\)-block sees all four joint colours, and
-\(D\cap R\cap S=\varnothing\).  This gives the two claimed incidences.
+The displayed multiplicities give
+\(|R^*|=|S^*|=\lfloor n/2\rfloor\), so \(R\) and \(S\) belong to \(B_n\).  Every block of
+\(X\) sees all four joint colours, whereas \(D\cap R^*\cap S^*=\varnothing\).
+This proves the two claimed incidences.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:lift}]
@@ -253,47 +299,65 @@ Let \(f\in\End(H_n)\).  By Lemma~\ref{lem:middle-invariant},
 pointwise.
 
 If \(h(X)=Y\ne X\), choose \(R,S\in B_n\) from
-Lemma~\ref{lem:separation}.  Applying \(h\) maps the edge \(\{X,R,S\}\) to the
+Lemma~\ref{lem:separation}.  Applying \(h\) would map the edge \(\{X,R,S\}\) to the
 nonedge \(\{Y,R,S\}\), a contradiction.  Hence \(f^d=h=\mathrm{id}\), so
 \(f\) is bijective and its inverse is the endomorphism \(f^{d-1}\).
 \end{proof}
 
-\section{Even middle layers: the two modulo four branch}
+\section{Even balanced layers with
+\texorpdfstring{\(n\equiv2\pmod4\)}{n congruent to 2 modulo 4}}
 
-Let \(n=2k\), where \(k\ge5\) is odd, and let
+Let \(n=2k\), where \(k\ge5\) is odd, and let \(\widehat\Omega\) be a
+\(2k\)-element ground set.  Put
 \[
-H_k=3\text{-}\mathrm{UQI}(2k,2),
-\qquad
-G_k=[H_k]_2.
+B_{2k}=3\text{-}\mathrm{UQI}(2k,2),
+\qquad G_{2k}=[B_{2k}]_2.
 \]
 The vertices are unordered equipartitions \([A]=\{A,A^c\}\), with
-\(|A|=k\).  If \(s=|A\cap B|\), the four pair cells have sizes
-\(s,k-s,k-s,s\).  A balanced third part splits all four cells if and only if
+\(|A|=k\).  If \(s=|A\cap B|\), the four intersection cells, in the order
+\[
+A\cap B,\quad A\setminus B,\quad B\setminus A,\quad
+\widehat\Omega\setminus(A\cup B),
+\]
+have sizes \(s,k-s,k-s,s\).  A third equipartition, represented by a
+\(k\)-set \(C\), splits all four cells if and only if
 \[
 2\le s\le k-2.
 \]
-For sufficiency, choose its intersections with the four cells to have sizes
+Necessity follows because each cell must contain a point of \(C\) and a
+point outside \(C\), and hence must have size at least \(2\).  For
+sufficiency, choose \(C\) so that its intersections with the four cells have
+respective sizes
 \[
 1,\quad 1,\quad k-s-1,\quad s-1.
 \]
 
-Fix a point in the \(2k\)-set.  The quotient vertices become the
-\(r\)-subsets of a \(v\)-set, where
+Write the ground set as
+\(\widehat\Omega=\Omega\cup\{\infty\}\), with \(|\Omega|=2k-1\).  Orient
+each equipartition towards the block containing \(\infty\), and delete
+\(\infty\).  This identifies the vertices bijectively with the \(r\)-subsets
+of \(\Omega\), where
 \[
-r=k-1,\qquad v=2r+1=2k-1.
+r=k-1,\qquad |\Omega|=2r+1=2k-1.
 \]
-Let \(\Gamma\) join two \(r\)-subsets when their intersection has size
-\(0\) or \(r-1\).  Then
+If two reduced representatives meet in \(j\) points, their corresponding
+oriented \(k\)-blocks meet in \(j+1\) points.  Thus distinct vertices are
+nonadjacent in \(G_{2k}\) precisely when \(j\in\{0,r-1\}\).  Let \(\Gamma\)
+be the graph on \(\binom{\Omega}{r}\) in which two sets are adjacent exactly
+in those two cases.
+Then
 \[
-G_k=\overline{\Gamma}.
+G_{2k}=\overline{\Gamma}.
 \]
 
-\begin{lemma}\label{lem:gamma-clique}
+\begin{lemma}[Clique number of \(\Gamma\)]\label{lem:gamma-clique}
 \(\Gamma\) is vertex-transitive and \(\omega(\Gamma)=r+2\).
 \end{lemma}
 
 \begin{proof}
-Fixing an \((r-1)\)-subset gives a clique of size \(r+2\).  For the upper
+The natural action of \(S_{\Omega}\) on \(r\)-subsets is transitive and
+preserves \(\Gamma\).  For the lower bound, fixing an \((r-1)\)-subset gives
+a clique of size \(r+2\).  For the upper
 bound, first suppose that a clique contains disjoint \(A,B\).  There is one
 point \(x\) outside \(A\cup B\).  If \(C\) is adjacent to both, then
 \[
@@ -314,37 +378,49 @@ have size \(r-1\).  Write
 \[
 A=D\cup\{a\},\qquad B=D\cup\{b\},\qquad |D|=r-1.
 \]
+Indeed, a set \(C\) meeting both \(A\) and \(B\) in \(r-1\) points either
+contains \(D\), or omits some \(d\in D\).  In the latter case the two
+intersection conditions force
+\(C=(D\setminus\{d\})\cup\{a,b\}\subseteq D\cup\{a,b\}\).
 Every further member either contains \(D\), or is an \(r\)-subset of
 \(D\cup\{a,b\}\).  If only the first type occurs, the family is contained
-in the \(r+2\) sets obtained by adjoining one point to \(D\).  If the
-second type occurs, no set \(D\cup\{z\}\) with
-\(z\notin D\cup\{a,b\}\) is compatible with it, and the clique is contained
-in the \(r+1\) \(r\)-subsets of \(D\cup\{a,b\}\).  This proves the bound.
+in the \(r+2\) sets obtained by adjoining one point to \(D\).  If a member of
+the second type occurs, it is not adjacent in \(\Gamma\) to any set
+\(D\cup\{z\}\) with \(z\notin D\cup\{a,b\}\), and the clique is contained in
+the \(r+1\) \(r\)-subsets of \(D\cup\{a,b\}\).  This proves the bound.
 \end{proof}
+
+Recall that a Steiner system \(S(t,k,v)\) is a family of \(k\)-subsets of a
+\(v\)-set in which every \(t\)-subset lies in exactly one block.
 
 \begin{lemma}[Design implication]\label{lem:design-implication}
 If
 \[
-\chi(\overline\Gamma)=\omega(\overline\Gamma),
+\chi(\overline{\Gamma})=\omega(\overline{\Gamma}),
 \]
 then a Steiner system \(S(r-1,r,2r+1)\) exists.
 \end{lemma}
 
 \begin{proof}
-For a clique \(\mathcal Q\) and independent set \(\mathcal I\) of the
-vertex-transitive graph \(\Gamma\), orbit averaging gives
+Let \(\mathcal Q\) be a clique and \(\mathcal I\) an independent set of the
+vertex-transitive graph \(\Gamma\).  Averaging
+\(|g\mathcal Q\cap\mathcal I|\le1\) over a transitive automorphism group gives
 \[
 |\mathcal Q||\mathcal I|\le\binom{2r+1}{r}.
 \]
-Assume \(\chi(\overline\Gamma)=\omega(\overline\Gamma)=c\).  Since
-\(\omega(\overline\Gamma)=\alpha(\Gamma)\), a \(c\)-colouring of
-\(\overline\Gamma\) and Lemma~\ref{lem:gamma-clique} force
+Assume \(\chi(\overline{\Gamma})=\omega(\overline{\Gamma})=c\), and put
+\(N=\binom{2r+1}{r}\).  Since a colour class of \(\overline{\Gamma}\) is a
+clique of \(\Gamma\), Lemma~\ref{lem:gamma-clique} gives
+\(N\le c(r+2)\).  On the other hand,
+\(c=\omega(\overline{\Gamma})=\alpha(\Gamma)\), so the clique--coclique
+inequality above gives \(c(r+2)\le N\).  Therefore equality holds
+throughout:
 \[
 c=\frac{\binom{2r+1}{r}}{r+2}
 \]
 and every colour class has size \(r+2\).
 
-Take a maximum clique \(\mathcal B\) of \(\overline\Gamma\).  It is an
+Take a maximum clique \(\mathcal B\) of \(\overline{\Gamma}\).  It is an
 independent set in \(\Gamma\), so no two of its \(r\)-subsets share an
 \((r-1)\)-subset.  Moreover,
 \[
@@ -352,7 +428,8 @@ independent set in \(\Gamma\), so no two of its \(r\)-subsets share an
 =\frac{\binom{2r+1}{r}}{r+2}\,r
 =\binom{2r+1}{r-1}.
 \]
-Thus every \((r-1)\)-subset lies in exactly one member of \(\mathcal B\).
+Thus every \((r-1)\)-subset lies in exactly one member of \(\mathcal B\), so
+\(\mathcal B\) is the block set of a Steiner system \(S(r-1,r,2r+1)\).
 \end{proof}
 
 \begin{proposition}\label{prop:mod2}
@@ -360,52 +437,104 @@ If \(k\ge5\) is odd, then \(3\text{-}\mathrm{UQI}(2k,2)\) is a core.
 \end{proposition}
 
 \begin{proof}
-The natural symmetric group is transitive on nonedges of \(G_k\).
-Cameron and Kazanidis therefore imply that \(G_k\) is a core or has a
-complete core \cite[Corollary 2.2]{CameronKazanidis2008}.  A finite graph
-has a complete core exactly when its clique and chromatic numbers agree.
+The group \(S_{\widehat\Omega}\cong S_{2k}\) acts on unordered
+equipartitions and preserves \(G_{2k}\).  By the adjacency criterion above,
+a distinct nonedge has
+\(s\in\{1,k-1\}\); the cases \(s=0\) and \(s=k\) represent the same unordered
+equipartition.  After choosing orientations, the four intersection cells
+therefore have sizes
+\(1,k-1,k-1,1\).  The alternatives \(s=1\) and \(s=k-1\) describe the same
+unordered pair after complementing one chosen block.  Hence
+\(S_{\widehat\Omega}\), and
+therefore \(\Aut(G_{2k})\), is transitive on unordered nonedges.
+Corollary 2.2 of Cameron and Kazanidis implies that \(G_{2k}\) is either a
+core or a graph with a complete core \cite{CameronKazanidis2008}.  A finite
+graph has a complete core exactly when its clique and chromatic numbers agree.
 
-By Lemma~\ref{lem:design-implication}, equality would yield
+By Lemma~\ref{lem:design-implication}, equality of the clique and chromatic
+numbers would yield
 \[
 S(k-2,k-1,2k-1).
 \]
-In such a design the number of blocks through a fixed \((k-3)\)-subset is
+In such a design, the number of blocks through a fixed \((k-3)\)-subset is
 \[
 \lambda_{k-3}
 =\frac{\binom{k+2}{1}}{\binom21}
 =\frac{k+2}{2},
 \]
 which is not an integer for odd \(k\).  Hence the complete-core alternative
-is impossible, so \(G_k\) is a core.  Apply Lemma~\ref{lem:transfer}.
+is impossible, so \(G_{2k}\) is a core.  Lemma~\ref{lem:transfer} now shows
+that \(B_{2k}\) is a core.
 \end{proof}
 
-\section{Even middle layers: the zero modulo four branch}
+\section{Even balanced layers with
+\texorpdfstring{\(n\equiv0\pmod4\)}{n congruent to 0 modulo 4}}
 
-Let \(n=4m\) and use the fixed-point model
+Let \(n=4m\) and put \(B_{4m}=3\text{-}\mathrm{UQI}(4m,2)\).  Write the
+\(4m\)-element ground set as
+\(\widehat\Omega=\Omega\cup\{\infty\}\), where \(|\Omega|=4m-1\).  Orient
+each equipartition towards its unique block containing \(\infty\).
+Removing \(\infty\) from that block gives a bijection with the fixed-point
+model
 \[
-V=\binom{\Omega}{2m-1},
+V(B_{4m})=\binom{\Omega}{2m-1},
 \qquad |\Omega|=4m-1.
 \]
-Three vertices form an edge when the seven finite Boolean cells other than
-\(111\) are nonempty.  The \(2\)-section joins \(X,Y\) when
+Here, the bit \(1\) denotes membership in the corresponding reduced set,
+equivalently membership in its oriented block containing \(\infty\).
+For three vertices, the \(111\)-cell contains \(\infty\) automatically, so
+they form an edge precisely when the other seven Boolean cells in \(\Omega\)
+are nonempty.
+
+Put \(r=2m-1\) and \(a=|X\cap Y|\).  In the order
+\[
+X\cap Y,\quad X\setminus Y,\quad Y\setminus X,\quad
+\Omega\setminus(X\cup Y),
+\]
+the four pair regions have sizes \(a,r-a,r-a,a+1\).  If
+\(1\le a\le r-2\), choose a third \(r\)-set whose intersections with these
+four regions have respective sizes
+\[
+0,\quad 1,\quad r-a-1,\quad a.
+\]
+The first region need only contribute to its
+non-\(111\) cell, whereas each of the other three regions is split between
+the two values of the third bit.  This makes all seven required cells
+nonempty.  Conversely, the non-\(111\) cell in the first region and the two
+cells in each difference region force \(a\ge1\) and \(r-a\ge2\).  Thus the
+\(2\)-section joins \(X\) and \(Y\) exactly when
 \[
 1\le |X\cap Y|\le2m-3.
 \]
-Thus distinct nonedges have intersection \(0\) or \(2m-2\), and form one
-orbit under the full \(S_{4m}\)-action on equipartitions.
+Distinct nonedges therefore have intersection \(0\) or \(r-1\).  In the
+equipartition model these belong to the same orbit: complementing one
+oriented block interchanges the two cases, and the four cells have sizes
+\(1,r,r,1\).  Hence all unordered nonedges form one orbit under the action of
+\(S_{\widehat\Omega}\cong S_{4m}\) transported to the fixed-point model.
 
-\begin{lemma}[Critical-fold criterion]\label{lem:critical-fold}
-Suppose every link of a vertex-transitive \(3\)-uniform hypergraph has
-clique number at most \(M\), its distinct \(2\)-section nonedges form one
-orbit, and a standard nonedge \(P,Q\) has \(M+1\) auxiliary vertices such
-that every auxiliary pair is in an edge with \(P\) or \(Q\).  Then the
-hypergraph is a core.
+\begin{lemma}[A collision criterion]\label{lem:critical-fold}
+Suppose that \(H\) is a vertex-transitive \(3\)-uniform hypergraph, every
+link of \(H\) has clique number at most \(M\), and \(\Aut(H)\) is transitive
+on the unordered pairs of distinct vertices that are nonedges of \([H]_2\).
+Suppose
+also that a fixed nonedge \(\{P,Q\}\) admits distinct vertices
+\(R_1,\ldots,R_{M+1}\) such that, for every \(i<j\), at least one of
+\[
+\{P,R_i,R_j\},\qquad \{Q,R_i,R_j\}
+\]
+is an edge.  Then \(H\) is a core.
 \end{lemma}
 
 \begin{proof}
-If an endomorphism identifies \(P,Q\), the auxiliary images are distinct
-and form an \((M+1)\)-clique in the link of the common image.  Every
-possible collision is equivalent to this one.
+If an endomorphism identifies \(P\) and \(Q\), the images of
+\(R_1,\ldots,R_{M+1}\) are distinct: for each \(i<j\), the pair
+\(\{R_i,R_j\}\) is contained in a hyperedge and hence its vertices cannot
+have the same image.  They form an
+\((M+1)\)-clique in the link of the common image, a contradiction.  More
+generally, two distinct vertices identified by an endomorphism must be
+nonadjacent in the \(2\)-section.  By the orbit hypothesis an automorphism
+sends the unordered pair \(\{P,Q\}\) to that pair, and precomposition reduces
+the collision to the fixed pair \(\{P,Q\}\).  Thus no collision is possible.
 \end{proof}
 
 \begin{proposition}\label{prop:4m}
@@ -413,27 +542,43 @@ For every \(m\ge4\), \(3\text{-}\mathrm{UQI}(4m,2)\) is a core.
 \end{proposition}
 
 \begin{proof}
-For a link clique \(\mathcal C\) at \(T\), the traces
-\(\{T\cap R:R\in\mathcal C\}\) form an antichain in \(2^T\).  Hence
+The action of \(S_{\widehat\Omega}\) is transitive on \(V(B_{4m})\).  For a
+clique \(\mathcal C\) in \(L_{B_{4m}}(T)\), the traces
+\(\{T\cap R:R\in\mathcal C\}\) form an antichain in \(2^T\): a containment
+between two traces would make one of the two difference cells inside \(T\)
+empty.  Hence every link of \(B_{4m}\) has clique number at most
 \[
-\omega(L_T)\le M_m:=\binom{2m-1}{m-1}.
+M_m:=\binom{2m-1}{m-1}.
 \]
 
-Choose disjoint \(K,\{p,q\},W\) with
+\emph{Construction.}
+We construct \(M_m\) central vertices indexed by the \((m-1)\)-subsets of
+\(Q\), and then add one exceptional vertex.  The three types below are
+chosen so that pairs of central vertices are witnessed by \(Q\), whereas
+pairs containing the exceptional vertex are witnessed by either \(P\) or
+\(Q\).
+
+Choose pairwise disjoint sets \(K\), \(\{p,q\}\), and \(W\) with
 \[
 |K|=2m-2,\qquad |W|=2m-1,
 \]
 and put \(P=K\cup\{p\}\), \(Q=K\cup\{q\}\).  Fix
 \(x\in K\) and distinct \(u,v\in W\), and put \(O=\{p\}\cup W\).
+The pair \(\{P,Q\}\) is a nonedge because \(|P\cap Q|=2m-2\).
 
-Partition \(A\in\binom{Q}{m-1}\) into the three types
+Divide the family \(\binom{Q}{m-1}\) into three types, labelled
+\(0,10,11\), respectively:
 \[
-x\notin A,\qquad
-x\in A,\ q\notin A,\qquad
-x,q\in A.
+\begin{array}{c|l}
+0&x\notin A,\\
+10&x\in A,\ q\notin A,\\
+11&x,q\in A.
+\end{array}
 \]
-Match them bijectively with complement pairs of \(m\)-subsets of \(O\)
-of the following respective types:
+The complement pairs of \(m\)-subsets of \(O\) likewise fall into three
+classes: either \(u\) and \(v\) are separated, or they lie together in the
+unique \(p\)-free representative, or they lie together in its complement.  Thus
+these classes exhaust all complement pairs.  Their cardinalities are
 \[
 \begin{array}{c|c|c}
 \text{type}&\text{condition}&\text{number}\\ \hline
@@ -444,21 +589,28 @@ of the following respective types:
 \binom{2m-3}{m-3}.
 \end{array}
 \]
-The three classes on the \(A\)-side have the same respective cardinalities:
-choose \(m-1\) points while avoiding \(x\), choose \(x\) and \(m-2\)
-further points while avoiding \(q\), or choose \(x,q\) and \(m-3\)
-further points.  Thus the typewise bijections exist and together exhaust
-both sides.
+The three subfamilies of \(\binom{Q}{m-1}\) have, respectively, the three
+cardinalities displayed above: one chooses \(m-1\) points while avoiding
+\(x\), chooses \(x\) and \(m-2\) further points while avoiding \(q\), or
+chooses \(x,q\) and \(m-3\) further points.  For each type, fix a bijection
+between the two corresponding classes.
 
-Let \(B_A\) be the chosen representative and set \(R_A=A\cup B_A\).
-For distinct \(A,A'\), put
+For types \(10\) and \(11\), let \(C_A\) be the unique \(p\)-free
+representative of the assigned complement pair; for type \(0\), choose
+either representative.  Set \(R_A=A\cup C_A\).  Since \(Q\cap O=\varnothing\),
+each \(R_A\) has size \((m-1)+m=2m-1\) and hence is a vertex of \(B_{4m}\).
+
+\emph{Pairs of central vertices.}
+For distinct \(A\) and \(A'\), put
 \[
-s=|A\cap A'|,\qquad t=|B_A\cap B_{A'}|.
+s=|A\cap A'|,\qquad t=|C_A\cap C_{A'}|.
 \]
-Distinct equal-sized \(A,A'\) give \(0\le s\le m-2\).  Distinct assigned
-complement pairs make \(B_A,B_{A'}\) neither equal nor complementary, so
-\(1\le t\le m-1\).  In bit order \((Q,R_A,R_{A'})\), the seven required
-atom sizes are
+Since \(A\) and \(A'\) are distinct and have the same size,
+\(0\le s\le m-2\).  Since their assigned complement pairs are distinct,
+\(C_A\) and \(C_{A'}\) are neither equal nor complementary, and
+\(1\le t\le m-1\).  With the non-\(111\) Boolean cells indexed in the order
+\(000,001,010,011,100,101,110\), their sizes for
+\((Q,R_A,R_{A'})\) are
 \[
 \begin{array}{c|ccccccc}
  &000&001&010&011&100&101&110\\ \hline
@@ -466,17 +618,20 @@ atom sizes are
  &t&m-t&m-t&t&s+1&m-1-s&m-1-s.
 \end{array}
 \]
-They are all positive.  Hence distinct central vertices satisfy
+They are all positive.  Hence, for distinct \(A,A'\),
 \[
-\{Q,R_A,R_{A'}\}\in E.
+\{Q,R_A,R_{A'}\}\in E(B_{4m}).
 \]
 
-Set
+\emph{Pairs containing the exceptional vertex.}
+Put
 \[
-E=\{x,p\}\cup(W\setminus\{u,v\}).
+Z=\{x,p\}\cup(W\setminus\{u,v\}).
 \]
-The required exceptional atom sizes, in bit order
-\((\text{anchor},E,R_A)\), are
+For \(A\) of a given type, let
+\(\operatorname{anc}(A)\in\{P,Q\}\) be the anchor shown in the corresponding
+row below.  The seven non-\(111\) Boolean-cell sizes for
+\((\operatorname{anc}(A),Z,R_A)\) are
 \[
 \begin{array}{c|c|ccccccc}
 \text{type}&\text{anchor}&000&001&010&011&100&101&110\\ \hline
@@ -485,55 +640,74 @@ The required exceptional atom sizes, in bit order
 11&P&2&1&m-3&m&m&m-3&1.
 \end{array}
 \]
-All are positive for \(m\ge4\).  Thus
+All are positive for \(m\ge4\), and hence
+\(\{\operatorname{anc}(A),Z,R_A\}\in E(B_{4m})\).
+
+The family
 \[
-\{E\}\cup\left\{R_A:A\in\binom{Q}{m-1}\right\}
+\{Z\}\cup\left\{R_A:A\in\binom{Q}{m-1}\right\}
 \]
-has \(M_m+1\) vertices and satisfies Lemma~\ref{lem:critical-fold}.
+has \(M_m+1\) vertices.  Every pair of central vertices is witnessed by
+\(Q\), and every pair consisting of \(Z\) and a central vertex is witnessed
+by the anchor in the table.  The hypotheses of Lemma~\ref{lem:critical-fold}
+are therefore satisfied, and \(B_{4m}\) is a core.
 \end{proof}
 
-\subsection{The exceptional value n=12}
+\subsection{The exceptional value
+\texorpdfstring{\(n=12\)}{n=12}}\label{subsec:n12}
 
-The preceding construction has two zero cells at \(m=3\).  We use a
-separate \(11\)-vertex obstruction.  In the model
-\(V=\binom{[11]}5\), set
+When \(m=3\), the two entries \(m-3\) in the type \(11\) row vanish.  We
+instead use an obstruction with eleven auxiliary vertices.  After deleting
+\(\infty\), let
+\[
+\Omega_{12}^{\circ}:=\{0,1,\ldots,10\},
+\]
+and use the model \(V(B_{12})=\binom{\Omega_{12}^{\circ}}5\).  Set
 \[
 P=\{0,1,2,3,4\},
 \qquad
 Q=\{0,1,2,3,5\}.
 \]
 The eleven auxiliary vertices and their anchor table are given in
-Appendix~\ref{app:n12}.  Every link clique has size at most
-\(\binom{5}{2}=10\), while identifying \(P,Q\) forces an \(11\)-clique in one
-link.  Hence \(3\text{-}\mathrm{UQI}(12,2)\) is a core.
+Appendix~\ref{app:n12}; the accompanying program
+\texttt{supplementary/verify\_certificates.py} verifies all \(55\) required
+pairwise incidences.  Every link \(L_{B_{12}}(T)\) has clique number at most
+\(\binom{5}{2}=10\), while identifying \(P\) and \(Q\) would force an
+\(11\)-clique in one link.  The preceding vertex-transitivity argument and
+the single-orbit property for nonedges also apply when \(m=3\).  Hence
+Lemma~\ref{lem:critical-fold} applies to this certificate and proves that
+\(B_{12}=3\text{-}\mathrm{UQI}(12,2)\) is a core.
 
 \begin{proof}[Proof of Theorem~\ref{thm:even-middle}]
-The case \(n=8\) is due to Thomas and Akhtar
-\cite[Theorem 4]{ThomasAkhtar2026}.  Proposition \ref{prop:mod2} treats
+For \(n=8\), all admissible vertices have block sizes \(4+4\), so
+\(3\text{-}\mathrm{QI}(8,2)=3\text{-}\mathrm{UQI}(8,2)\); this case is due
+to Thomas and Akhtar \cite[Theorem 4]{ThomasAkhtar2026}.
+Proposition~\ref{prop:mod2} treats
 \(n\equiv2\pmod4\), the preceding subsection treats \(n=12\), and
 Proposition~\ref{prop:4m} treats \(n\equiv0\pmod4\), \(n\ge16\).
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
-For even \(n\), the middle layer is a core by
-Theorem~\ref{thm:even-middle}.  For odd \(n\ge9\), it is a core by
-\cite{KimMergedJohnson2026}.  Apply Theorem~\ref{thm:lift}.  The case \(n=8\) is
-already included in the even statement.
+For even \(n\), the balanced layer is a core by
+Theorem~\ref{thm:even-middle}.  For odd \(n\ge9\), the balanced layer is a
+core by Theorem 7.1 and Corollary 7.2 of the companion manuscript
+\cite{KimMergedJohnson2026}.  Theorem~\ref{thm:lift} therefore proves the
+result.  The case \(n=8\) is already included in the even statement.
 \end{proof}
 
 \appendix
 
-\section{The n=12 critical-fold certificate}\label{app:n12}
+\section{The \texorpdfstring{\(n=12\)}{n=12} collision certificate}\label{app:n12}
 
-The auxiliary vertices are
+The auxiliary vertices \(R_1,\ldots,R_{11}\) are
 \[
 \begin{array}{c|l@{\qquad}c|l}
-1&\{1,2,3,5,10\}&2&\{0,3,8,9,10\}\\
-3&\{0,2,7,9,10\}&4&\{2,3,4,9,10\}\\
-5&\{1,3,4,8,10\}&6&\{1,2,4,7,10\}\\
-7&\{0,5,7,8,9\}&8&\{0,1,6,7,10\}\\
-9&\{3,4,5,7,9\}&10&\{2,4,5,6,9\}\\
-11&\{1,4,5,7,8\}&&
+R_1&\{1,2,3,5,10\}&R_2&\{0,3,8,9,10\}\\
+R_3&\{0,2,7,9,10\}&R_4&\{2,3,4,9,10\}\\
+R_5&\{1,3,4,8,10\}&R_6&\{1,2,4,7,10\}\\
+R_7&\{0,5,7,8,9\}&R_8&\{0,1,6,7,10\}\\
+R_9&\{3,4,5,7,9\}&R_{10}&\{2,4,5,6,9\}\\
+R_{11}&\{1,4,5,7,8\}&&
 \end{array}
 \]
 and the upper-triangular anchor table is
@@ -552,19 +726,24 @@ and the upper-triangular anchor table is
 10& & & & & & & & & &P
 \end{array}
 \]
-where an entry \(P\) or \(Q\) means that the corresponding auxiliary pair,
-together with that anchor, is a hyperedge.  Each assertion is a direct
-seven-cell check.
+An entry \(P\) or \(Q\) indicates that the corresponding pair of auxiliary
+vertices forms a hyperedge with that anchor.  Each incidence is a direct
+seven-cell check; for example, the entry in row \(1\), column \(2\) states
+that, in the order \(000,001,010,011,100,101,110\), the seven required cell
+sizes for \((P,R_1,R_2)\) are \((2,2,1,1,1,1,2)\).  The accompanying script
+verifies all \(55\) incidences directly from the listed sets.
 
-\section{AI assistance and verification status}
+\section*{Declaration on generative AI}
 
-AI systems were used to generate conjectures, search for finite
-obstructions, propose symbolic constructions, draft text and code, and
-perform adversarial audits.  The author selected, checked, and organized the
-arguments and remains responsible for every claim.  The accompanying
-programs verify finite certificates and symbolic identities but do not
-constitute peer review or formal proof.  This manuscript has not been
-validated by a qualified human specialist.
+ChatGPT assisted with exploratory calculations, code development, drafting,
+and editorial review.  The author is responsible for the mathematical
+statements, proofs, and accompanying code.
+
+\section*{Data and code availability}
+
+The source archive accompanying this preprint contains the verification
+scripts.  They check the finite \(n=12\) certificate, the boundary instance
+\(n=16\) of the general construction, and the stated small lift instances.
 
 \bibliographystyle{plain}
 \bibliography{references}

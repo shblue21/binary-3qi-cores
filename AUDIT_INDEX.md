@@ -1,4 +1,4 @@
-# AI audit index
+# AI review index
 
 These reports are preserved as research provenance. They are not human peer
 review and are not premises of the manuscript proofs.

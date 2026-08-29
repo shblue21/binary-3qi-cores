@@ -15,7 +15,11 @@ the payloads in release/SHA256SUMS and release/MD5SUMS.
 - ZIP integrity test: pass.
 - Extracted source SHA-256 verification: pass.
 - Extracted finite-certificate replay: pass.
-- PDF pages: 8.
+- Normal and optimized-mode verifier replay: pass.
+- Cross-directory deterministic PDF comparison: pass.
+- Deterministic source-package rebuild: pass.
+- GitHub Actions verification workflow: included.
+- PDF pages: 10.
 - PDF visual inspection: pass.
 - Qualified human specialist review: not yet performed.
 - Zenodo DOI: pending.

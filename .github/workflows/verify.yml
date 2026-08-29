@@ -1,0 +1,51 @@
+name: Verification
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  python-verifiers:
+    name: Python ${{ matrix.python-version }} verifiers
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run verifiers
+        run: make check
+      - name: Run verifiers with optimized Python
+        run: make optimized-check
+
+  manuscript:
+    name: Build deterministic manuscript
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install LaTeX and Poppler
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            poppler-utils \
+            texlive-bibtex-extra \
+            texlive-fonts-recommended \
+            texlive-latex-base \
+            texlive-latex-extra \
+            texlive-latex-recommended
+      - name: Build and verify release candidate
+        run: make release-check
+      - uses: actions/upload-artifact@v4
+        with:
+          name: binary-3qi-cores-preprint
+          path: output/pdf/binary-3qi-cores-preprint.pdf
+          if-no-files-found: error
